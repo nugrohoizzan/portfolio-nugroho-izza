@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internship Detail</title>
+<link rel="stylesheet" href="css/internship-detail.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<button class="close-btn" onclick="history.back()">✕</button>
+
+<div class="detail-wrapper">
+  <div class="detail-card">
+
+    <!-- IMAGE -->
+    <div class="detail-image">
+      <img id="detailImage" alt="Internship Image">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="detail-content">
+      <h1 id="detailTitle"></h1>
+
+      <div class="meta-row">
+        <div id="detailCategories" class="category-container"></div>
+        <span id="detailDate" class="detail-date"></span>
+      </div>
+
+
+      <p id="detailDesc" class="detail-desc"></p>
+
+      <a id="downloadCert" class="download-btn" target="_blank">
+        Download Certificate
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/internship-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/project-detail.css" />
+</head>
+<body>
+<button class="close-btn" onclick="history.back()">✕</button>
+
+<div class="detail-wrapper">
+  <div class="detail-card">
+
+    <div class="detail-image">
+      <img id="projectImage" src="" alt="Project Image">
+    </div>
+
+    <div class="detail-content">
+      <h1 id="projectTitle"></h1>
+
+      <div class="meta-row">
+        <div class="category-container" id="projectCategories"></div>
+        <span class="detail-date" id="projectDate"></span>
+      </div>
+
+      <p class="detail-desc" id="projectDescription"></p>
+
+      <a id="projectLink" class="project-btn" target="_blank">
+        View Repository
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/project-detail.js"></script>
+</body>
+</html>

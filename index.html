@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Nugroho Izza</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#d1d1d1;
+    --text:#000;
+    --accent:#facc15;
+    --accent-hover:#eab308;
+
+    --max-wrap:1280px;
+    --img-w:clamp(240px,25vw,400px);
+    --right-space:clamp(120px,12vw,240px);
+    --col-gap:clamp(2rem,3vw,2.6rem);
+    --wrap-pad-v:clamp(4rem,8vh,6rem);
+    --wrap-pad-h:clamp(2rem,5vw,4rem);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{
+    height:100%;
+    font-family:poppins, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+/* ===== PROGRESS BAR (BOTTOM) ===== */
+#scrollProgress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: #f4b400;
+  z-index: 9999;
+  transition: width 0.15s linear;
+}
+  .side-links a.active {
+  position: relative;
+  color: #f4b400;
+}
+
+.side-links a.active::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  width: 5px;
+  height: 100%;
+  background: #f4b400;
+  border-radius: 4px;
+}
+
+
+  /* ===== SECTION WRAPPER ===== */
+  #about {
+    width:100%;
+    min-height:80vh;
+    display:flex;
+    justify-content:center;
+    padding:var(--wrap-pad-v) var(--wrap-pad-h);
+    position:relative;
+  }
+
+  .wrap {
+    width:100%;
+    max-width:var(--max-wrap);
+    position:relative;
+    padding-bottom:8rem;
+  }
+
+  .grid {
+    display:grid;
+    grid-template-columns: var(--img-w) 1fr var(--right-space);
+    gap: var(--col-gap);
+    align-items:center; /* <=== ubah dari start jadi center biar sejajar tengah */
+  }
+
+  /* ===== NAME ===== */
+  .name {
+    grid-column:2;
+    font-size:clamp(1.6rem,2.6vw,2.4rem);
+    font-weight:700;
+    line-height:1.05;
+    align-self:start;
+    margin-bottom:clamp(.25rem,1vh,.5rem);
+    margin-left:0.3rem;
+    position:relative;
+    top:-0.1rem;
+  }
+
+  /* ===== ROLE (tidak diubah) ===== */
+  .role {
+    grid-column:3;
+    justify-self:end;
+    text-align:right;
+    font-size:clamp(1.4rem,2.4vw,2.2rem);
+    font-weight:700;
+    line-height:1.05;
+    align-self:start;
+    margin-right: 0.1rem;
+  }
+
+  /* ===== IMAGE ===== */
+  .img-col {
+    grid-column:1;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+  }
+
+  .avatar {
+    width:var(--img-w);
+    height:var(--img-w);
+    border-radius:50%;
+    object-fit:cover;
+    box-shadow:0 12px 40px rgba(0,0,0,0.25);
+    transform:translate(-3%,-3%);
+  }
+
+  /* ===== CONTENT (tengah sejajar dengan foto) ===== */
+  .content-col {
+    grid-column:2 / span 2;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:clamp(1.2rem,2.2vh,1.8rem);
+    max-width:700px;
+  }
+
+  .content-col p {
+    font-size:18px;
+    line-height:1.8;
+    color:#111;
+    text-align:left;
+  }
+
+  .cv-btn {
+    display:inline-block;
+    background:var(--accent);
+    color:var(--text);
+    font-weight:800;
+    text-decoration:none;
+    padding:clamp(.8rem,1.5vw,1rem) clamp(1.6rem,3vw,2.2rem);
+    border-radius:8px;
+    box-shadow:0 8px 22px rgba(0,0,0,0.18);
+    width:fit-content;
+    position:relative;
+    z-index:2;
+    margin-top:0.8rem;
+    margin-bottom:1.5rem;
+  }
+
+  .cv-btn:hover {
+    background:var(--accent-hover);
+    transform:translateY(-3px);
+  }
+
+  /* ===== ABOUT ME (tidak diubah) ===== */
+  .about-title {
+  position:absolute;
+  bottom:clamp(2rem,4vw,3rem);
+  right:6rem;
+  font-size:clamp(80px,9vw,160px);
+  font-weight:750;
+  letter-spacing:1px;
+  color:var(--text);
+  line-height:0.9;
+  margin:0;
+  white-space:nowrap;
+  z-index:0;
+}
+
+/* ===== INTERN SECTION ===== */
+
+.internships-section {
+  background: #111;
+  color: #fff;
+  padding: 4rem 2rem;
+}
+
+.intern-title-wrap h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.title-underline {
+  width: 90px;
+  height: 6px;
+  background: #facc15;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.projects-title-wrap h2 {
+  position: relative;
+  display: inline-block;       /* supaya underline mengikuti lebar teks */
+  padding-bottom: 12px;        /* jarak antara teks & garis */
+}
+
+.projects-title-wrap h2::after {
+  content: "";
+  display: block;
+  width: 80%;                 /* otomatis sama panjang dengan teks */
+  height: 6px;
+  background: #facc15;
+  border-radius: 4px;
+  margin: 0 auto;              /* center */
+}
+
+/* ===== GRID ===== */
+.internships-grid {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(3, 1fr); /* desktop */
+}
+
+/* Card */
+.intern-card {
+  background: #1a1a1a;
+  border: 1.5px solid #333;
+  padding: 1.3rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* ==================== GARIS KUNING REVEAL ==================== */
+.intern-card::before,
+.intern-card::after {
+  content: "";
+  position: absolute;
+  height: 2px;    
+  background: #facc15; /* kuning */
+  width: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width 0.45s ease-out;
+  z-index: 5;
+}
+
+/* Garis atas */
+.intern-card::before {
+  top: 0;
+}
+
+/* Garis bawah */
+.intern-card::after {
+  bottom: 0;
+}
+
+/* Saat hover: garis melebar dari tengah ke kiri & kanan */
+.intern-card:hover::before,
+.intern-card:hover::after {
+  width: 100%;
+}
+
+/* KIRI & KANAN muncul setelah garis atas & bawah selesai */
+.intern-card .side-border {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  height: 0;
+  width: 2px;
+  background: #facc15;
+  left: 0;
+  transition: height 0.45s ease-out 0.15s;
+}
+
+.intern-card .side-border.right {
+  right: 0;
+  left: auto;
+}
+
+.intern-card:hover .side-border {
+  height: 100%;
+  top: 0;
+}
+
+.intern-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.intern-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+
+.date { color:#eee; font-size: .85rem; }
+.read-more { color: #facc15; font-weight:700; font-size:.9rem; text-decoration:none; }
+
+.badge {
+  position:absolute;
+  top:12px; right:12px;
+  background:#000; border:1px solid #666;
+  padding:4px 8px; border-radius:12px; font-size:.72rem;
+}
+
+/* Button */
+.view-btn {
+  margin: 2.5rem auto 0;
+  display: block;
+  padding: 0.7rem 2.2rem;
+  background: transparent;
+  border: 2px solid #facc15;
+  color: #facc15;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.view-btn:hover { background:#facc15; color:#000; }
+
+/* ---------- Projects styles (isolated) ---------- */
+.projects-section {
+  background: transparent;
+  color: #111;
+  padding: 3.2rem 2rem 6rem;
+}
+
+/* title */
+.projects-title-wrap {
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+.projects-title-wrap h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.projects-sub {
+  margin-top: .45rem;
+  color: #222;
+  opacity: .85;
+  font-size: 1rem;
+}
+
+/* grid */
+.projects-grid {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(3, 1fr); /* desktop */
+  align-items: stretch;
+  margin-top: 2rem;
+}
+
+/* card */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.12);
+  min-height: 360px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+}
+
+/* image wrapper - enforce 1:1 square aspect ratio */
+.project-thumb {
+  position: relative;
+  width:100%;
+  aspect-ratio: 1 / 1;            /* 1:1 square */
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
+}
+.project-thumb img {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  transition: transform .6s cubic-bezier(.2,.9,.2,1), filter .4s ease;
+  transform-origin: center center;
+  filter: saturate(0.98) contrast(0.98);
+}
+
+/* OVERLAY now covers entire image and centers content */
+.project-overlay {
+  position: absolute;
+  inset: 0; /* fill the entire thumb */
+  background: rgba(0,0,0,0.42); /* ~42% black overlay (adjustable) */
+  color: #fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center; /* vertically center */
+  align-items:center;     /* horizontally center */
+  gap: .35rem;
+  padding: 1.2rem;
+  transition: opacity .38s ease, transform .38s ease;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  z-index: 4;
+  text-align: center;
+}
+
+/* overlay text styles (bigger, centered) */
+.project-overlay .project-title {
+  font-weight: 900;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: 0.2px;
+  color: #fff;
+  margin: 0;
+}
+.project-overlay .project-desc {
+  font-size: .9rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.3;
+  max-width: 92%;
+}
+
+/* content panel (below image) */
+.project-body {
+  padding: 1.1rem;
+  background: transparent;
+  color: #111; /* initial dark text */
+  transition: color .35s ease, background .35s ease;
+  flex: 1 1 auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+/* meta below image - transparent, text dark initially */
+.project-card .meta {
+  padding: .9rem 1.1rem;
+  background: transparent;
+  color: #111;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+/* title & desc in meta (kept separate from overlay text) */
+.project-body .project-title { font-size: 1rem; font-weight:800; color: inherit; }
+.project-body .project-desc { font-size:.95rem; color: rgba(0,0,0,0.75); }
+
+/* Hover effects: reveal overlay, zoom image, change body bg/text */
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+/* reveal overlay (full cover) */
+.project-card:hover .project-overlay {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* image zoom */
+.project-card:hover .project-thumb img {
+  transform: scale(1.08);
+  filter: saturate(1.05) contrast(1.02) brightness(.95);
+}
+
+/* when hovered change body text color for contrast */
+.project-card:hover .project-body { background: #0b0b0b; color: #fff; }
+.project-card:hover .project-body .project-title { color: rgba(255,255,255,0.9); }
+
+/* yellow border reveal (top/bottom expand, side drop) */
+.project-card::before,
+.project-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #facc15;
+  transition: width .45s ease;
+  z-index: 6;
+  pointer-events: none;
+}
+.project-card::before { top: 0; }
+.project-card::after  { bottom: 0; }
+.project-card:hover::before,
+.project-card:hover::after { width: 100%; }
+
+/* side borders */
+.project-card .side-border {
+  position:absolute;
+  width:2px;
+  height:0;
+  background:#facc15;
+  left:0;
+  top:0;
+  transition: height .45s ease .12s;
+  z-index:6;
+  pointer-events:none;
+}
+.project-card .side-border.right { right:0; left:auto; }
+.project-card:hover .side-border { height:100%; top:0; }
+
+/* VIEW MORE button (projects) - full yellow initial + hover invert */
+.projects-view-btn {
+  margin: 2rem auto 0;
+  display: block;
+  padding: .85rem 2.4rem;
+  background: #facc15;
+  color: #000;
+  border-radius: 8px;
+  font-weight: 800;
+  border: 2px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .25s ease, color .18s ease;
+  box-shadow: 0 8px 20px rgba(250,204,21,0.12);
+}
+.projects-view-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: #0b0b0b;
+  color: #facc15;
+  box-shadow: 0 12px 40px rgba(250,204,21,0.12);
+  border: 2px solid #facc15;
+}
+.fade-in {
+  animation: fadeIn .35s ease;
+}
+
+.fade-out {
+  animation: fadeOut .35s ease;
+}
+
+
+@keyframes fadeIn {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+
+.project-card,
+.intern-card {
+  opacity: 1;
+  transform: none;
+}
+
+/*====== CONTACTS SECTION =====*/
+/* MAIN SECTION */
+.contact-section {
+  background: #d9d9d9;
+  padding: 90px 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* CONTACT TITLE + ICON */
+/* CONTACT TITLE + ICON */
+.contact-title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: -20px; /* dinaikkan sedikit */
+}
+
+.star-icon {
+  font-size: 22px;
+  color: #facc15; /* KUNING */
+}
+
+.main-heading {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  margin-top: 5px;    /* jarak lebih rapat */
+  color: #0b0b0b;
+}
+
+.sub-text {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 4px;
+  margin-bottom: 30px; /* sedikit lebih dekat ke wrapper */
+  color: #333;
+}
+/* MAIN SECTION */
+.contact-section {
+  background: #d9d9d9;
+  padding: 100px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.contact-title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.star-icon {
+  font-size: 22px;
+  color: #facc15;
+}
+
+
+.contact-wrapper {
+  max-width: 1100px;
+  width: 90%;
+  margin: 0 auto;
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 60px 50px;
+  display: flex;
+  align-items: stretch;
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* FORM */
+.contact-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 12px 0 8px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 2px solid #000;
+  background: transparent;
+  outline: none;
+  resize: none;
+}
+
+.input-group label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group textarea:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 11px;
+  color: #000;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  gap: 24px;
+}
+
+.half {
+  flex: 1;
+}
+
+.send-btn {
+  background: #facc15;
+  color: #000;
+  padding: 14px 32px;
+  border: 2px solid #facc15;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.send-btn:hover {
+  background: #000;
+  color: #facc15;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* IMAGE */
+.img-box {
+  flex-shrink: 0;
+  width: 380px;
+  position: relative;
+  height: 100%;
+  overflow: visible;
+}
+
+.img-box img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  max-width: none;
+  object-fit: contain;
+  filter: grayscale(100%);
+  /* Bagian atas keluar dari wrapper */
+  top: -80px;
+}
+
+/* ===== CONNECT SECTION ===== */
+.connect-section {
+  padding: 60px 0 70px 0; /* lebih pendek dari sebelumnya */
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.connect-title {
+  width: 100%;
+  text-align: center;
+  font-size: 42px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.yellow-connect {
+  color: #f4c542;
+}
+
+.yellow-line {
+  width: 150px;
+  height: 4px;
+  background: #f4c542;
+  margin: 0 auto 50px auto;
+  border-radius: 2px;
+}
+
+/* WRAPPER */
+.connect-wrapper {
+  max-width: 1000px;     /* dulu 1100 → dipendekkan */
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* LEFT SIDE */
+.connect-left {
+  flex: 1;
+  text-align: left;
+}
+
+.connect-img {
+  width: 220px;  /* sedikit diperkecil */
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 20px;
+  border: 4px solid #f4c542;
+}
+
+.connect-quote {
+  margin-top: 20px;
+  font-size: 18px;
+  max-width: 300px;
+  color: #f1f1f1;
+  margin-left: 20px;
+}
+
+.quote-icon {
+  color: #f4c542;
+  font-size: 26px;
+  margin-right: 6px;
+}
+
+/* RIGHT SIDE */
+.connect-right {
+  flex: 1;
+  text-align: right;
+  margin-right: 25px;
+}
+
+.find-me {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.social-icons a i {
+  font-size: 32px;
+  color: white; /* SESUAI PERMINTAAN */
+  transition: 0.3s;
+}
+
+.social-icons a i:hover {
+  color: #f4c542;
+  transform: translateY(-4px);
+}
+
+/* ===== SEPARATOR LINE ===== */
+.footer-separator {
+  width: 100%;
+  height: 0.1px; /* sangat tipis seperti garis pulpem */
+  background: #D1D1D1; /* samar */
+  margin-top: 4px;
+  margin-bottom: 1px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .connect-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .connect-left, .connect-right {
+    text-align: center;
+    margin: 0;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .connect-img {
+    margin-left: 0;
+  }
+
+  .connect-title {
+  font-size: 29px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .contact-wrapper {
+    flex-direction: column;
+    padding: 50px 40px;
+    text-align: center;
+  }
+
+  .img-box {
+    order: -1;
+    width: 100%;
+    height: 360px;
+    margin-bottom: 30px;
+  }
+
+  .img-box img {
+    position: static;
+    transform: translateX(-50%);
+    width: 300px;
+    top: auto;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .send-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-heading {
+    font-size: 30px;
+  }
+
+  .contact-wrapper {
+    padding: 40px 25px;
+  }
+
+  .img-box img {
+    width: 260px;
+  }
+}
+
+/* ===== iPad Air & iPad Mini (820px – 768px) ===== */
+@media (max-width: 900px) {
+  .contact-wrapper {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 40px;
+  }
+
+  .img-box {
+    order: -1;
+    width: 100%;
+    height: auto;
+
+    /* Atur jarak dengan form */
+    margin-top: -10px;      /* gambar turun sedikit */
+    margin-bottom: 25px;    /* jarak ke form */
+    
+    display: flex;
+    justify-content: center;
+  }
+
+  .img-box img {
+    position: static;
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 50%;
+    transform: none;
+    filter: grayscale(0%);
+    object-position: top center;
+  }
+
+  .sub-text{
+    font-size: 15px;
+  }
+}
+
+/* ===== Mobile (< 576px) ===== */
+@media (max-width: 576px) {
+  .img-box {
+    margin-top: -5px;        /* sedikit saja turun */
+    margin-bottom: 20px;     /* jarak form ideal */
+  }
+
+  .img-box img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .sub-text{
+    font-size: 12px;
+  }
+}
+
+/* ===== LAYER CONTENT ===== */
+.layar-dalam {
+    width: 100%;
+    max-width: 1000px; /* maksimal desktop */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+/* ===== HERO / UGO SECTION ===== */
+section.ugo {
+    background: url("assets/ugo21.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* desktop parallax */
+    text-align: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: clamp(6rem, 12vh, 10rem);
+    font-size: clamp(20px, 2vw, 32px);
+    white-space: nowrap; /* selalu satu baris */
+    overflow: hidden;
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+    .layar-dalam {
+        max-width: 90%;
+    }
+
+    section.ugo {
+        background-attachment: scroll !important; /* force scroll di HP */
+        background-position: center top;
+        padding: clamp(4rem, 8vh, 6rem);
+        font-size: clamp(16px, 4vw, 20px); 
+        white-space: nowrap; /* tetap satu baris */
+    }
+}
+
+/* TABLET: 2 kolom */
+@media (max-width: 1000px) {
+  #projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE: 1 kolom */
+@media (max-width: 640px) {
+  #projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* responsive */
+@media (max-width:1000px) {
+  .projects-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width:640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card { min-height: 300px; }
+  .projects-title-wrap h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width:420px){
+  .project-card { min-height: 260px; }
+  .projects-title-wrap h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  .projects-sub {
+  margin-top: .45rem;
+  color: #222;
+  opacity: .85;
+  font-size: 0.9rem;
+}
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .internships-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet */
+  }
+}
+
+@media (max-width: 640px) {
+  .internships-grid {
+    grid-template-columns: 1fr; /* Mobile */
+  }
+}
+
+@media (max-width: 420px) {
+  .intern-card img { height: 150px; }
+  .view-btn { padding: 0.6rem 1.6rem; }
+}
+
+ /* ===== RESPONSIVE ===== */
+@media (max-width:1400px){
+
+ 
+  .name br,
+  .role br {
+    display: none;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem;
+  }
+
+  
+  .name {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: clamp(2rem, 7vw, 2.6rem);
+    margin: 0.2rem 0;  
+  }
+
+ 
+  .role {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: clamp(1.7rem, 6vw, 2.3rem);
+    margin: 0.1rem 0 0.2rem; 
+  }
+
+  /* Image center */
+  .img-col {
+    justify-content: center;
+  }
+
+  .avatar {
+    width: clamp(210px, 40vw, 300px);
+    height: clamp(210px, 40vw, 300px);
+  }
+
+  .content-col p {
+    text-align: justify;
+    margin-left: 0.9rem;
+    margin-right: 0.9rem;
+    font-size: 15px;          
+    line-height: 1.7;         
+    text-indent: 1.5rem;      
+  }
+
+  /* Button tetap di tengah */
+  .cv-btn {
+    align-self: center;
+    margin-top: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* About title dekat tombol */
+  .about-title {
+    bottom: 3.6rem;
+    right: 0.5rem;
+    font-size: clamp(60px, 14vw, 110px);
+    opacity: 0.9;
+  }
+}
+</style>
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="nav-container">
+    <!-- Hamburger Menu (on left for mobile) -->
+    <div class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Brand (Ganti teks jadi logo) -->
+    <a href="#home" class="nav-logo">
+      <img src="assets/NUGROHO.webp" alt="Nugroho Logo">
+    </a>
+
+    <!-- Desktop Menu -->
+    <ul class="desktop-nav">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#internships">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact1">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+  <!-- ===== SIDEBAR (MOBILE) ===== -->
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-header">
+      <h2>NAVIGATION</h2>
+      <div class="close-btn" id="close-sidebar" aria-label="Close sidebar">✕</div>
+    </div>
+    <ul class="side-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#internships">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact1">Contact</a></li>
+    </ul>
+    <div class="side-cta">
+      <a href="#internships" class="hero-btn">View My Experience</a>
+    </div>
+  </aside>
+
+  <!-- Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="home">
+    <div class="dot-pattern"></div>
+    <div class="hero-text">
+      <h2>MY NAME IS</h2>
+      <h1><span>NUGROHO</span> IZZA</h1>
+      <p>I'M A FRESH GRADUATE INFORMATICS ENGINEERING</p>
+      <a href="#internships" class="hero-btn">VIEW MY EXPERIENCE</a>
+    </div>
+    <div class="hero-left-bg"></div>
+    <div class="hero-right">
+      <img src="assets/ugo5.jpg" alt="Profile Picture">
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+ <section id="about">
+  <div class="wrap">
+    <div class="grid">
+      <h2 class="name">NUGROHO<br>IZZA</h2>
+      <h3 class="role">FULLSTACK<br>DEVELOPER</h3>
+
+      <div class="img-col">
+        <img class="avatar" src="assets/ugo12.webp" alt="Nugroho Izza">
+      </div>
+
+      <div class="content-col">
+        <p>
+          As a fresh graduate of the Informatics program at UPN "Veteran" Yogyakarta, I have a strong interest in full-stack application and web development. I focus on building scalable, efficient systems that prioritize user needs, applying an approach grounded in attention to detail, openness to exchanging ideas, and continuous improvement throughout the development process.
+        </p>
+        <a class="cv-btn" href="assets/CV_Nugroho_Izza_Nurcahyo.pdf" download>DOWNLOAD CV</a>
+      </div>
+    </div>
+  </div>
+  <h1 class="about-title">ABOUT ME</h1>
+</section>
+
+<!-- ===== INTERNSHIP SECTION ===== -->
+<section id="internships" class="internships-section">
+  <div class="intern-title-wrap">
+    <h2>INTERNSHIPS & CERTIFICATIONS</h2>
+    <div class="title-underline"></div>
+  </div>
+
+  <div class="internships-grid" id="internshipsGrid">
+
+    <!-- CARD 1 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">November, 2025</span>
+      <span class="badge">Course</span>
+      <img src="assets/cert7.jpg">
+      <h3>RevoU Data Analyst Mini Course</h3>
+      <p>Analyzed datasets using Excel and visualized insights through Google Looker Studio.</p>
+      <a class="read-more" href="internship-detail.html?id=revou">READ MORE →</a>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">November, 2025</span>
+      <span class="badge">Course</span>
+      <img src="assets/cert8.jpg">
+      <h3>MySkill Data Analyst Short Class</h3>
+      <p>Performed data analysis in Excel using the PDCA framework for structured problem solving.</p>
+      <a class="read-more" href="internship-detail.html?id=myskill">READ MORE →</a>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">November, 2025</span>
+      <span class="badge">Course</span>
+      <img src="assets/cert9.jpg">
+      <h3>MySkill Software Engineering Short Class</h3>
+      <p>Built and customized websites using WordPress with focus on structure and usability.</p>
+      <a class="read-more" href="internship-detail.html?id=myskill1">READ MORE →</a>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">November, 2024</span>
+      <span class="badge">Volunteer</span>
+      <img src="assets/cert1.jpg">
+      <h3>Youth Indonesia Volunteer</h3>
+      <p>Participated in the International Volunteer Chapter Malaysia program by Youth.ID, contributing to cross-cultural engagement and global awareness initiatives.</p>
+      <a class="read-more" href="internship-detail.html?id=youthid">READ MORE →</a>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">August, 2024</span>
+      <span class="badge">Internship</span>
+      <img src="assets/cert2.jpg">
+      <h3>PT KAI Internship</h3>
+      <p>Collaborated on developing an internal web platform for real-time asset tracking and reporting within PT KAI.</p>
+      <a class="read-more" href="internship-detail.html?id=kai">READ MORE →</a>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">April, 2024</span>
+      <span class="badge">Bootcamp</span>
+      <img src="assets/cert3.jpg">
+      <h3>Data Scientist BNSP</h3>
+      <p>Completed an Associate Data Scientist bootcamp certified by BNSP, applying R Studio to collect, explore, cleanse, model, and evaluate banking customer data through nationally standardized competency units.</p>
+      <a class="read-more" href="internship-detail.html?id=bnsp">READ MORE →</a>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">March, 2024</span>
+      <span class="badge">Bootcamp</span>
+      <img src="assets/cert4.jpg">
+      <h3>Data Scientist Kominfo</h3>
+      <p>Analyzed structured datasets using Python and data visualization tools during a team-based project under professional mentorship.</p>
+      <a class="read-more" href="internship-detail.html?id=kominfo">READ MORE →</a>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">January, 2024</span>
+      <span class="badge">Bootcamp</span>
+      <img src="assets/cert5.jpg">
+      <h3>Junior Web Programmer BNSP</h3>
+      <p>Developed a library management website using React.js and MySQL, following national standards under BNSP certification assessment.</p>
+      <a class="read-more" href="internship-detail.html?id=jwpbnsp">READ MORE →</a>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="intern-card">
+      <div class="side-border"></div>
+      <div class="side-border right"></div>
+      <span class="date">October, 2023</span>
+      <span class="badge">Internship</span>
+      <img src="assets/cert6.jpg">
+      <h3>BAPPEDA Yogyakarta</h3>
+      <p>Collected city infrastructure data, analyzed condition assessments, and produced visual reports to identify facilities needing upgrades.</p>
+      <a class="read-more" href="internship-detail.html?id=bappeda">READ MORE →</a>
+    </div>
+
+  </div>
+
+  <button id="toggleBtn" class="view-btn">VIEW MORE</button>
+</section>
+
+  <!-- ===== PROJECTS SECTION ===== -->
+<section id="projects" class="projects-section">
+  <div class="projects-title-wrap">
+    <h2>LOOK AT MY PROJECTS</h2>
+    <div class="projects-sub">Where ideas turn into digital creations.</div>
+  </div>
+
+  <div class="projects-grid" id="projectsGrid">
+    <!-- Project 1 -->
+    <article class="project-card" onclick="goProject('yolov8')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/8.webp" alt="YOLOV8n">
+        <div class="project-overlay">
+          <!-- overlay title centered -->
+          <div class="project-title">YOLOV8n Badminton In/Out Detection</div>
+          <div class="project-desc">Smart vision logic for accurate in/out judgment.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">Machine Learning Development</strong>
+          <div class="project-desc">Smart vision logic for accurate in/out judgment.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2 -->
+    <article class="project-card" onclick="goProject('abidin')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/7.webp" alt="Abidin's Portfolio">
+        <div class="project-overlay">
+          <div class="project-title">Abidin's Portfolio</div>
+          <div class="project-desc">A modern personal portfolio built for clean and professional branding.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">Website Development</strong>
+          <div class="project-desc">A modern personal portfolio built for clean and professional branding.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3 -->
+    <article class="project-card" onclick="goProject('chord')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/5.webp" alt="Chords Classifier">
+        <div class="project-overlay">
+          <div class="project-title">Real-Time Chord Classifier using MFCC & XGBoost</div>
+          <div class="project-desc">Real-time chord detection through audio feature analysis.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">Machine Learning Development</strong>
+          <div class="project-desc">Real-time chord detection through audio feature analysis.</div>
+        </div>
+      </div>
+    </article>
+
+        <!-- Project 4 -->
+    <article class="project-card" onclick="goProject('kaiMapping')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/2.webp" alt="KAI Mapping Assets">
+        <div class="project-overlay">
+          <div class="project-title">KAI Mapping Assets</div>
+          <div class="project-desc">A web-based mapping system that displays and manages PT KAI’s asset locations.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">Website Development</strong>
+          <div class="project-desc">A web-based mapping system that displays and manages PT KAI’s asset locations.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 5 -->
+    <article class="project-card" onclick="goProject('animek')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/1.webp" alt="Animek">
+        <div class="project-overlay">
+          <div class="project-title">Animek</div>
+          <div class="project-desc">A simple and intuitive app for exploring anime and accessing essential details.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">App Development</strong>
+          <div class="project-desc">A simple and intuitive app for exploring anime and accessing essential details.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 6 -->
+    <article class="project-card" onclick="goProject('tukusepatu')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/6.webp" alt="TukuSepatu">
+        <div class="project-overlay">
+          <div class="project-title">TukuSepatu</div>
+          <div class="project-desc">A simple e-commerce app designed for smooth shoe shopping.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">App Development</strong>
+          <div class="project-desc">A simple e-commerce app designed for smooth shoe shopping.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 7 -->
+    <article class="project-card" onclick="goProject('okjek')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/3.webp" alt="OK-JEK">
+        <div class="project-overlay">
+          <div class="project-title">OK-JEK</div>
+          <div class="project-desc">A dummy app prototype inspired by modern online motorcycle taxi services.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">Website Development</strong>
+          <div class="project-desc">A dummy app prototype inspired by modern online motorcycle taxi services.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 8 -->
+    <article class="project-card" onclick="goProject('gatotkaca')">
+      <div class="side-border"></div><div class="side-border right"></div>
+
+      <div class="project-thumb">
+        <img src="assets/projects/4.webp" alt="Gatotkaca">
+        <div class="project-overlay">
+          <div class="project-title">Gatotkaca</div>
+          <div class="project-desc">A simple e-learning platform built as my first web project.</div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div class="meta">
+          <strong class="project-title">Website Development</strong>
+          <div class="project-desc">A simple e-learning platform built as my first web project.</div>
+        </div>
+      </div>
+    </article>
+
+
+  </div>
+
+  <button id="projectsToggle" class="projects-view-btn">VIEW MORE</button>
+</section>
+
+<section class="ugo">
+  <div class="layar-dalam">
+      <p>Nugroho Izza Nurcahyo</p>
+  </div>
+</section>
+
+<section id="contact1" class="contact-section">
+  <div class="contact-title">
+    <i class="bi bi-star-fill star-icon"></i>
+    <span>Contact Me</span>
+  </div>
+  <h2 class="main-heading">GET IN TOUCH WITH ME</h2>
+  <p class="sub-text">Feel free to reach out for collaborations or any inquiries.</p>
+
+  <div class="contact-wrapper">
+      <!-- FORM -->
+      <form id="contactForm" class="contact-form">
+        <div class="input-group">
+          <input type="text" name="from_name" placeholder=" " required />
+          <label>Your Name</label>
+        </div>
+
+        <div class="row">
+          <div class="input-group half">
+            <input type="email" name="from_email" placeholder=" " required />
+            <label>Your Email</label>
+          </div>
+          <div class="input-group half">
+            <input type="text" name="subject" placeholder=" " required />
+            <label>Your Subject</label>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <textarea name="message" rows="5" placeholder=" " required></textarea>
+          <label>Your Message</label>
+        </div>
+
+        <button type="submit" class="send-btn">SEND MESSAGE ↗</button>
+        <p class="status-msg" style="margin-top:15px; font-size:14px;"></p>
+      </form>
+
+      <!-- IMAGE -->
+      <div class="img-box">
+        <img src="assets/ugo111.webp" alt="Nugroho Izza" />
+      </div>
+    
+  </div>
+</section>
+
+ <!-- ===== CONNECT SECTION ===== -->
+<section id="contact" class="connect-section">
+  <div class="footer-separator"></div><br>
+  <h2 class="connect-title">LET’S <span class="yellow-connect">CONNECT</span> THERE</h2>
+  <div class="yellow-line"></div>
+
+  <div class="connect-wrapper">
+
+    <!-- LEFT SIDE -->
+    <div class="connect-left">
+      <img src="assets/ugo99.jpg" class="connect-img" alt="Profile Image">
+
+      <div class="connect-quote">
+        <i class="bi bi-quote quote-icon"></i>
+        <p>"Strive to be better every day, even if it's just 1%."</p>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="connect-right">
+      <h3 class="find-me">Find Me On</h3>
+
+      <div class="social-icons">
+        <a href="mailto:nugrohoizza29@gmail.com"><i class="bi bi-envelope-fill"></i></a>
+        <a href="https://www.instagram.com/nugrohoizzan" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/nugroho-izza-nurcahyo-7395102a4" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/nugrohoizzan" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+    </div>
+
+  </div>
+  <!-- ===== SEPARATOR LINE BEFORE FOOTER ===== -->
+<div class="footer-separator"></div>
+</section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    &copy; 2025 Nugroho Izza. All rights reserved.
+  </footer>
+
+<!-- ============================================================
+     SCRIPT UTAMA 
+============================================================== -->
+<script>
+/* ============================================================
+   PROJECT DETAIL NAVIGATION
+============================================================ */
+function goProject(id) {
+  window.location.href = `project-detail.html?id=${id}`;
+}
+
+  // ====== PROGRESS BAR SCROLL ======
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrolled = (scrollTop / docHeight) * 100;
+  document.getElementById("scrollProgress").style.width = scrolled + "%";
+});
+/* ============================================================
+   NAVBAR SCROLL SPY — ACTIVE LINK BY SECTION
+============================================================ */
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".desktop-nav a, .side-links a");
+
+function activateMenu() {
+  let scrollPos = window.scrollY + 200;
+
+  sections.forEach(sec => {
+    let top = sec.offsetTop;
+    let height = sec.offsetHeight;
+    let id = sec.getAttribute("id");
+
+    if (scrollPos >= top && scrollPos < top + height) {
+      navLinks.forEach(link => link.classList.remove("active"));
+      document.querySelectorAll(`a[href="#${id}"]`).forEach(a => {
+        a.classList.add("active");
+      });
+    }
+  });
+}
+
+window.addEventListener("scroll", activateMenu);
+
+
+
+/* ============================================================
+   GLOBAL — FIX RESPONSIVE BUG (RESET ANIMATION OPACITY)
+============================================================ */
+function resetAnimations(cards) {
+  cards.forEach(card => {
+    card.style.opacity = "1";
+    card.style.transform = "none";
+  });
+}
+
+
+
+/* ============================================================
+   SIDEBAR HANDLER
+============================================================ */
+const toggle = document.getElementById("menu-toggle");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("sidebar-overlay");
+const closeBtn = document.getElementById("close-sidebar");
+
+const openSidebar = () => {
+  toggle.classList.add("active");
+  sidebar.classList.add("open");
+  overlay.classList.add("active");
+  sidebar.setAttribute("aria-hidden", "false");
+};
+
+const closeSidebar = () => {
+  toggle.classList.remove("active");
+  sidebar.classList.remove("open");
+  overlay.classList.remove("active");
+  sidebar.setAttribute("aria-hidden", "true");
+};
+
+if (toggle) toggle.addEventListener("click", openSidebar);
+if (closeBtn) closeBtn.addEventListener("click", closeSidebar);
+if (overlay) overlay.addEventListener("click", closeSidebar);
+
+document.querySelectorAll(".side-links a").forEach(link => {
+  link.addEventListener("click", closeSidebar);
+});
+
+
+
+/* ============================================================
+   INTERN SECTION
+============================================================ */
+const internBtn = document.getElementById("toggleBtn");
+const internGrid = document.getElementById("internshipsGrid");
+const internCards = internGrid ? [...internGrid.querySelectorAll(".intern-card")] : [];
+let internExpanded = false;
+
+function getInternInitialCount() {
+  const w = window.innerWidth;
+  if (w <= 640) return 1;
+  if (w <= 1000) return 2;
+  return 3;
+}
+
+function applyInternVisibility(animated = false) {
+  const limit = internExpanded ? internCards.length : getInternInitialCount();
+
+  internCards.forEach((card, i) => {
+    const show = i < limit;
+
+    if (show) {
+      card.style.display = "block";
+      if (animated) {
+        card.classList.remove("fade-out");
+        void card.offsetWidth;
+        card.classList.add("fade-in");
+      }
+    } else {
+      if (animated) {
+        card.classList.remove("fade-in");
+        void card.offsetWidth;
+        card.classList.add("fade-out");
+        setTimeout(() => { card.style.display = "none"; }, 330);
+      } else {
+        card.style.display = "none";
+      }
+    }
+  });
+
+  internBtn.textContent = internExpanded ? "VIEW LESS" : "VIEW MORE";
+  resetAnimations(internCards);
+}
+
+window.addEventListener("resize", () => {
+  internExpanded = false;
+  applyInternVisibility(false);
+});
+
+if (internBtn && internGrid) {
+  internBtn.addEventListener("click", () => {
+    internExpanded = !internExpanded;
+    applyInternVisibility(true);
+  });
+
+  applyInternVisibility(false);
+}
+
+
+
+/* ============================================================
+   PROJECT SECTION
+============================================================ */
+const projectBtn = document.getElementById("projectsToggle");
+const projectGrid = document.getElementById("projectsGrid");
+const projectCards = projectGrid ? [...projectGrid.querySelectorAll(".project-card")] : [];
+let projectExpanded = false;
+
+function getProjectInitialCount() {
+  const w = window.innerWidth;
+  if (w <= 640) return 1;
+  if (w <= 1000) return 2;
+  return 3;
+}
+
+function applyProjectVisibility(animated = false) {
+  const limit = projectExpanded ? projectCards.length : getProjectInitialCount();
+
+  projectCards.forEach((card, i) => {
+    const show = i < limit;
+
+    if (show) {
+      card.style.display = "flex";
+      if (animated) {
+        card.classList.remove("fade-out");
+        void card.offsetWidth;
+        card.classList.add("fade-in");
+      }
+    } else {
+      if (animated) {
+        card.classList.remove("fade-in");
+        void card.offsetWidth;
+        card.classList.add("fade-out");
+        setTimeout(() => { card.style.display = "none"; }, 330);
+      } else {
+        card.style.display = "none";
+      }
+    }
+  });
+
+  projectBtn.textContent = projectExpanded ? "VIEW LESS" : "VIEW MORE";
+  resetAnimations(projectCards);
+}
+
+window.addEventListener("resize", () => {
+  projectExpanded = false;
+  applyProjectVisibility(false);
+});
+
+if (projectBtn && projectGrid) {
+  projectBtn.addEventListener("click", () => {
+    projectExpanded = !projectExpanded;
+    applyProjectVisibility(true);
+  });
+
+  applyProjectVisibility(false);
+}
+</script>
+
+
+
+
+<!-- ============================================================
+     EMAILJS — CDN
+============================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+  /* Ganti dengan PUBLIC KEY kamu */
+  emailjs.init("x6alFmTdA2QgS6E9p");
+</script>
+
+
+
+<!-- ============================================================
+     EMAILJS — FORM HANDLER (AMAN TIDAK BENTROK)
+============================================================== -->
+<script>
+const form = document.getElementById("contactForm");
+const statusMsg = document.querySelector(".status-msg");
+
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    statusMsg.textContent = "Sending...";
+    statusMsg.style.color = "#888";
+
+    emailjs.sendForm("service_8o0bdsu", "template_khq7ktf", this)
+      .then(() => {
+        statusMsg.textContent = "Message sent successfully!";
+        statusMsg.style.color = "#00b894";
+        form.reset();
+      })
+      .catch((err) => {
+        console.log(err);
+        statusMsg.textContent = "Failed to send message. Try again.";
+        statusMsg.style.color = "#d63031";
+      });
+  });
+}
+</script>
+
+
+<!-- PROGRESS BAR (BOTTOM) -->
+<div id="scrollProgress"></div>
+</body>
+</html>

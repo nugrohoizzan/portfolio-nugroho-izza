@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #000000;
+  color: #f5f5f5;
+}
+
+/* close */
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* wrapper */
+.detail-wrapper {
+  min-height: 100vh;
+  padding: 32px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card */
+.detail-card {
+  max-width: 920px;
+  width: 100%;
+  background: #0b0b0b;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,.8);
+}
+
+/* image */
+.detail-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+/* content */
+.detail-content {
+  padding: 32px 36px 40px;
+}
+
+.detail-content h1 {
+  margin: 0 0 18px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* meta row */
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+/* category pill */
+.category-pill {
+  border: 1.5px solid #EAB308;
+  color: #EAB308;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* date */
+.detail-date {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* description */
+.detail-desc {
+  line-height: 1.8;
+  font-size: 15px;
+  color: #d1d5db;
+  white-space: pre-line;
+}
+
+/* download */
+.download-btn {
+  display: inline-block;
+  margin-top: 32px;
+  background: #EAB308;
+  color: #000;
+  padding: 14px 30px;
+  border-radius: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .25s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(234,179,8,.4);
+}
+
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-chip {
+  padding: 6px 14px;
+  border: 1.5px solid #EAB308;
+  border-radius: 999px;
+  color: #EAB308;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.category-chip:hover {
+  background: #EAB308;
+  color: #000;
+}
+
+
+/* mobile */
+@media (max-width: 768px) {
+  .detail-image img {
+    height: 260px;
+  }
+
+  .detail-content {
+    padding: 24px;
+  }
+
+  .detail-content h1 {
+    font-size: 22px;
+  }
+}
